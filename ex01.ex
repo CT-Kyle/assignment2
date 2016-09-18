@@ -36,7 +36,7 @@ defmodule Ex01 do
   # Write a function that adds two numbers using fn syntax #
   ##########################################################
 
-  sum2a = your_anonymous_function(1, 2)
+  sum2a = fn(a, b) -> a + b end
 
   assert sum2a.(1, 2)    == 3
   assert sum2a.(-1, 100) == 99
@@ -47,7 +47,7 @@ defmodule Ex01 do
   # Write a function that adds two numbers using & syntax  #
   ##########################################################
 
-  sum2b = your_anonymous_function(1, 2)
+  sum2b = &(&1 + &2)
 
   assert sum2b.(1, 2)    == 3
   assert sum2b.(-1, 100) == 99
@@ -60,8 +60,7 @@ defmodule Ex01 do
   # no explicit + operators in your function                          #
   #####################################################################
 
-  sum3a = your_anonymous_function(1, 2, 3)
-
+  sum3a = fn(a,b,c) -> sum2a.(a,b)  sum2a.(c)  end
   assert sum3a.(1, 3, 5)  == 9
   assert sum3a.(1, -3, 5) == 3
 
@@ -95,5 +94,3 @@ defmodule Ex01 do
   assert add_99.(3) == 102
 
 end
-
-

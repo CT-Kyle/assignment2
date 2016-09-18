@@ -55,9 +55,23 @@ defmodule Ex03 do
 
   """
 
-  def odd_even . . . "your code"
+  def map([], func) do
+   []
+  end
+  def map([h | t], func) do
+    [func.(h) | map(t, func)]
+  end
+  def convert(h) do
+    cond do
+      Integer.is_even(h) -> :even
+      Integer.is_odd(h)  -> :odd
+    end
+  end
+  def odd_even(list) do
+    map(list, convert)
+  end
 
-
+  IO.inspect odd_even [1,2,3,4]
   ##############################################################################
   # 3.2:  5 points #
   ##################
@@ -77,7 +91,9 @@ defmodule Ex03 do
 
   """
 
-  def list_contains . .. "your code"
+  def list_contains do
+
+  end
 
   ##############################################################################
   # 3.3:  5 points #
@@ -101,7 +117,9 @@ defmodule Ex03 do
 
   """
 
-  def list_equal . . . "your code"
+  def list_equal do
+
+  end
 
 
 
@@ -149,7 +167,9 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  def won . . . "your code"
+  def won do
+
+  end
 
 
   ###########################
