@@ -55,23 +55,21 @@ defmodule Ex03 do
 
   """
 
-  def map([], func) do
-   []
-  end
-  def map([h | t], func) do
-    [func.(h) | map(t, func)]
-  end
-  def convert(h) do
-    cond do
-      Integer.is_even(h) -> :even
-      Integer.is_odd(h)  -> :odd
+
+  defmodule Converter do
+    def odd_even([]), do: []
+    def odd_even([h|tail]), do: [convert(h) | odd_even(tail)]
+
+    def convert(h) do
+      cond do
+        Integer.is_even(h) -> :even
+        Integer.is_odd(h)  -> :odd
+      end
     end
   end
-  def odd_even(list) do
-    map(list, convert)
-  end
 
-  IO.inspect odd_even [1,2,3,4]
+  IO.inspect Converter.odd_even ([1,2,3,4])
+
   ##############################################################################
   # 3.2:  5 points #
   ##################
@@ -90,10 +88,13 @@ defmodule Ex03 do
       true
 
   """
-
-  def list_contains do
-
+  defmodule Checker do
+    def list_contains([], a), do: false
+    def list_contains([h | tail], h), do: true
+    def list_contains([h | tail], x), do: list_contains(tail, x)
   end
+
+  IO.inspect Checker.list_contains([1,2,3], 3)
 
   ##############################################################################
   # 3.3:  5 points #
@@ -117,11 +118,10 @@ defmodule Ex03 do
 
   """
 
-  def list_equal do
-
-  end
-
-
+  def list_equal([], []), do: true
+  def list_equal([h1], [h1]), do: true
+  def list_equal([h1 | tail1], [h1 | tail2]), do: list_equal(tail1, tail2)
+  def list_equal(a,b), do: false
 
   ##############################################################################
   # 3.4:  5 points #
@@ -167,8 +167,22 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  def won do
-
+  def won(boardList) do
+    case boardList do
+      #Horiz
+      {x, x, x,  _, _, _,  _, _, _} -> x
+      {_, _, _,  x, x, x,  _, _, _} -> x
+      {_, _, _,  _, _, _,  x, x, x} -> x
+      #Vert
+      {x, _, _,  x, _, _,  x, _, _} -> x
+      {_, x, _,  _, x, _,  _, x, _} -> x
+      {_, _, x,  _, _, x,  _, _, x} -> x
+      #diag
+      {x, _, _,  _, x, _,  _, _, x} -> x
+      {_, _, x,  _, x, _,  x, _, _} -> x
+      #no win
+      _                     -> false
+    end
   end
 
 
