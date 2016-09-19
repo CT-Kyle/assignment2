@@ -56,7 +56,6 @@ defmodule Ex03 do
   """
 
 
-  defmodule Converter do
     def odd_even([]), do: []
     def odd_even([h|tail]), do: [convert(h) | odd_even(tail)]
 
@@ -66,9 +65,8 @@ defmodule Ex03 do
         Integer.is_odd(h)  -> :odd
       end
     end
-  end
 
-  IO.inspect Converter.odd_even ([1,2,3,4])
+
 
   ##############################################################################
   # 3.2:  5 points #
@@ -88,13 +86,11 @@ defmodule Ex03 do
       true
 
   """
-  defmodule Checker do
     def list_contains([], a), do: false
     def list_contains([h | tail], h), do: true
     def list_contains([h | tail], x), do: list_contains(tail, x)
-  end
 
-  IO.inspect Checker.list_contains([1,2,3], 3)
+
 
   ##############################################################################
   # 3.3:  5 points #
