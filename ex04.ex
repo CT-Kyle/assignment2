@@ -39,8 +39,9 @@ defmodule Ex04 do
       [ 1, 2, 3, 4, 5 ]
 
   """
-  def reverse . . . "your code"
-
+  def reverse(a) do
+    reduce(a, [], &[&1 | &2])
+  end
   ##############################################################################
   # 4.2:  5 points #
   ##################
@@ -55,7 +56,9 @@ defmodule Ex04 do
 
   """
 
-  def min . . . "your code"
+  def min([h|tail]) do
+    reduce([h|tail], h, &(min(&1,&2)))
+  end
 
   ##############################################################################
   # 4.3: 10 points #
@@ -75,10 +78,17 @@ defmodule Ex04 do
   return value will be the thing you have to manipulate.
   """
 
-  def even_odd . . . "your code"
+  def even_odd_parser(x, {evenList, oddList}) do
+    cond do
+      Integer.is_even x -> {[x | evenList], [oddList]} #prepend to front of approproiate list
+      Integer.is_odd x  -> {[evenList], [x | oddList]}
+    end
+  end
 
-
-
+  def even_odd(mixedList) do
+    reduce(mixedList, [], &even_odd_parser/2)
+  end
+  ####Still issues with this sorry!!!
 
   ###########################
   # IGNORE FROM HERE TO END #
@@ -90,7 +100,7 @@ defmodule Ex04 do
     File.write("Elixir.Ex04.beam", bytecode)
   end
 
-end
+  end
 
 
 ExUnit.start
@@ -98,4 +108,3 @@ defmodule TestEx04 do
   use ExUnit.Case
   doctest Ex04
 end
-
